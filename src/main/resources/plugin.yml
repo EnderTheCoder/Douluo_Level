@@ -1,0 +1,6 @@
+name: Douluo_level
+version: '${project.version}'
+main: douluo_level.douluo_level.Douluo_level
+api-version: 1.18
+authors: [ Ender ]
+description: 用于斗罗服务器的等级系统
