@@ -1,6 +1,23 @@
 name: DouluoLevel
 version: '${project.version}'
 main: douluolevel.douluolevel.DouluoLevel
-api-version: 1.18
+api-version: 1.12
 authors: [ Ender ]
 description: 用于斗罗服务器的等级系统
+depend: [PlaceholderAPI]
+
+commands:
+  leveladmin:
+    aliases:
+      - la
+    description: 用于斗罗等级系统管理的命令
+    permission: douluolevel.admin
+    permission-message: 你没有使用此命令的权限，请联系管理员查询
+    usage: |
+      /leveladmin
+permissions:
+  douluolevel.admin:
+    description: 管理员用权限
+    default: true
+  douluolevel.vip:
+    description: VIP用权限

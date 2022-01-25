@@ -66,13 +66,19 @@
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
+
     </repositories>
 
     <dependencies>
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.79</version>
+        </dependency>
+        <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.18.1-R0.1-SNAPSHOT</version>
+            <version>1.12.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -86,6 +92,13 @@
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.36.0.3</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.serverct</groupId>
+            <artifactId>AttributeAPI</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/AP-APIAttrbiteAPI.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

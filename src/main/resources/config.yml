@@ -4,25 +4,55 @@ level:
   #等级名称
   name: 等级
   #1级需要经验
-  a1: 100
+  exp_initial: 100
   #每级需要的经验增加值
-  d: 50
+  exp_distance: 50
+  #VIP等级最大值
+  vip_max: 300
+  #VIP权限名称
+  vip_permission: douluolevel.vip
 
 #这里自定义属性
 qualities:
   #示例属性1，这里的quality_1就是变量名%quality_1%，建议使用英文以防止奇奇怪怪的问题
   - quality_1:
       #1级需要的经验
-      a1: 10
+      exp_initial: 10
       #每级需要的经验增加值
-      d: 10
+      exp_distance: 10
       #最大等级
       max: 100
       #显示的中文名
       display_name: 魂力
+      #vip最大等级
+      vip_max: 150
+      #vip权限名称
+      vip_permission: douluolevel.vip.quality_1
+      #属性效果
+      attributes:
+        - 物理伤害 #这里写效果的名字
+        - 生命力
+      attributes_distance:
+        - 100    #下面对应位置写属性每一级的增长值
+        - 50
   #示例属性2
   - quality_2:
-      a1: 10
-      d: 20
+      #1级需要的经验
+      exp_initial: 10
+      #每级需要的经验增加值
+      exp_distance: 10
+      #最大等级
       max: 100
-      display_name: 体质
+      #显示的中文名
+      display_name: 魂力
+      #vip最大等级
+      vip_max: 150
+      #vip权限名称
+      vip_permission: douluolevel.vip.quality_2
+      #属性效果
+      attributes:
+        - 物理伤害 #这里写效果的名字
+        - 生命力
+      attributes_distance:
+        - 100    #下面对应位置写属性每一级的增长值
+        - 50
