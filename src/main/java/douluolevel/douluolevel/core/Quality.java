@@ -13,9 +13,7 @@ import java.util.SplittableRandom;
 
 public class Quality {
     //put某个quality进入玩家数据
-    public static void putQuality(String username, QualityData quality, int level) {
-        UserData user = User.getUser(username);
-
+    public static void putQuality(UserData user, QualityData quality, int level) {
         assert user != null;
         if (user.getQualities() == null) {
             JSONObject newUserQualities = new JSONObject();
@@ -27,33 +25,44 @@ public class Quality {
 
     }
 
-    //升级某个quality
-    public static void upgradeQuality(String username, QualityData quality) {
+    //计算升级某个属性需要的经验值
+    public static int getQualityUpgradeExp(UserData user, QualityData quality) {
+        for (Map.Entry<?, ?> entry : user.getQualities().entrySet()) {
+            if (quality.getName().equals(entry.getKey().toString())) {
+                return quality.getExp_distance();
+            }
+        }
+        return quality.getExp_initial();
 
-        UserData user = User.getUser(username);
+    }
+
+
+    //升级某个quality
+    public static void upgradeQuality(UserData user, QualityData quality) {
+
         assert user != null;
         JSONObject userQualities = user.getQualities();
 
-        if (userQualities.get(quality.getName()) == null) putQuality(username, quality, 1);
-        else putQuality(username, quality, Integer.parseInt(Objects.requireNonNull(user.getQualities().get(quality.getName()).toString()) + 1));
+        if (userQualities.get(quality.getName()) == null) putQuality(user, quality, 1);
+        else putQuality(user, quality, Integer.parseInt(Objects.requireNonNull(user.getQualities().get(quality.getName()).toString())) + 1);
+
+        Level.subtractExpCurrent(user, getQualityUpgradeExp(user, quality));
+
     }
 
     //从玩家数据移除quality
-    public static void removeQuality(String username, String qualityToRemove) {
-        UserData user = User.getUser(username);
+    public static void removeQuality(UserData user, String qualityToRemove) {
         assert user != null;
         user.getQualities().remove(qualityToRemove);
         User.updateUser(user);
     }
 
     //检查玩家的quality是否存在，不存在即移除
-    public static void checkAndRemoveQuality(String username) {
-        UserData user = User.getUser(username);
-        List<QualityData> qualities = ConfigReader.getQualities();
+    public static void checkAndRemoveQuality(UserData user) {
         assert user != null;
         for (Map.Entry<?, ?> entry : user.getQualities().entrySet()) {
             if (ConfigReader.getQuality(entry.getKey().toString()) == null)
-                removeQuality(username, entry.getKey().toString());
+                removeQuality(user, entry.getKey().toString());
         }
 
     }

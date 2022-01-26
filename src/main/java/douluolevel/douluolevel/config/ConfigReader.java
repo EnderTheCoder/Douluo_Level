@@ -15,6 +15,19 @@ import static org.bukkit.Bukkit.getLogger;
 
 public class ConfigReader {
     static FileConfiguration config = DouluoLevel.instance.getConfig();
+
+    public static boolean isOnDebug() {
+        return config.getBoolean("debug");
+    }
+
+    //消息类型
+    public enum MessageType {
+        //客户端
+        CLIENT,
+        //服务端
+        SERVER
+    }
+
     //获取等级
     public static LevelData getLevel() {
         return new LevelData(
@@ -71,5 +84,11 @@ public class ConfigReader {
         return null;
     }
 
+    //用于获取提示信息
+    public static String getMessage(MessageType type, String messageName) {
+
+        return config.getString("message." + (type == MessageType.CLIENT ? "client" : "server") + "." + messageName);
+
+    }
 
 }

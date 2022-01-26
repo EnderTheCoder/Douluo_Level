@@ -33,8 +33,8 @@ qualities:
         - 物理伤害 #这里写效果的名字
         - 生命力
       attributes_distance:
-        - 100    #下面对应位置写属性每一级的增长值
-        - 50
+        - 10    #下面对应位置写属性每一级的增长值
+        - 5
   #示例属性2
   - quality_2:
       #1级需要的经验
@@ -56,3 +56,12 @@ qualities:
       attributes_distance:
         - 100    #下面对应位置写属性每一级的增长值
         - 50
+debug: true
+
+message:
+  client:
+    quality_not_found: 你查找的属性不存在
+    quality_upgrade_successful: 属性升级成功！
+    quality_exp_not_enough: 你的经验不足以升级该属性！
+    level_upgrade: 你的等级获得了提升！
+  server:

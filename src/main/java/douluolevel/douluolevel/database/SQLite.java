@@ -1,5 +1,6 @@
 package douluolevel.douluolevel.database;
 
+import douluolevel.douluolevel.config.ConfigReader;
 import org.bukkit.ChatColor;
 
 import java.sql.*;
@@ -7,9 +8,13 @@ import java.sql.*;
 import static org.bukkit.Bukkit.getLogger;
 //用于创建数据库
 public class SQLite {
-    Connection connection = null;
-    PreparedStatement statement = null;
+    private Connection connection = null;
+    private PreparedStatement statement = null;
+
+    private Timestamp startTime;
+
     public void connect() {
+        this.startTime = new Timestamp(System.currentTimeMillis());
             try {
                 Class.forName("org.sqlite.JDBC");
                 //如果没有数据库文件的话会自动创建
@@ -18,7 +23,7 @@ public class SQLite {
                 getLogger().severe( e.getClass().getName() + ": " + e.getMessage() );
                 return;
             }
-            getLogger().info(ChatColor.GREEN + "数据库连接成功");
+            if (ConfigReader.isOnDebug()) getLogger().info(ChatColor.GREEN + "数据库连接成功");
     }
 
     public Connection getConnection() {
@@ -89,10 +94,15 @@ public class SQLite {
     }
 
     public void close() {
+        //计算数据库查询所用时间并输出调试信息
+        Timestamp endTime = new Timestamp(System.currentTimeMillis());
+
+        if (ConfigReader.isOnDebug()) getLogger().info(String.format("数据库连接关闭，本次查询共用时%s毫秒", endTime.getTime() - startTime.getTime()));
+
         try {
             this.connection.close();
-            this.statement.close();
         } catch (SQLException e) {
+            getLogger().severe("关闭数据库连接时发生错误");
             e.printStackTrace();
         }
     }

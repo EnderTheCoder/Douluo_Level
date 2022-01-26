@@ -3,10 +3,6 @@ package douluolevel.douluolevel.core;
 import douluolevel.douluolevel.config.ConfigReader;
 import douluolevel.douluolevel.data.LevelData;
 import douluolevel.douluolevel.data.UserData;
-import douluolevel.douluolevel.database.User;
-import org.bukkit.entity.Player;
-
-import java.util.Map;
 
 import static douluolevel.douluolevel.config.ConfigReader.getLevel;
 
@@ -22,16 +18,13 @@ public class Level {
         return Math.min(max, (exp_now - level.getExp_initial()) / level.getExp_distance() + 1);
 
     }
-    //升级
-    public static void upgrade(String username, int newLevel, int expNew) {
-        UserData user = User.getUser(username);
+    //自然升级
+    public static void upgrade(UserData user, int expNew) {
         assert user != null;
-        user.setLevel(newLevel);
-        user.setExp_current(user.getExp_current() + expNew);
-        user.setExp_record(user.getExp_record() + expNew);
-        User.updateUser(user);
+        user.setLevel(getPlayerNewLevel(user, expNew));
+        user.update();
     }
-
+    //管理员设置等级
     public static void setLevel(UserData user, int newLevel) {
         user.setLevel(newLevel);
         int expRequired = ConfigReader.getLevel().getExp_initial();
@@ -54,9 +47,17 @@ public class Level {
         setExpCurrent(user, user.getExp_current() + addedExpCurrent);
     }
 
+    public static void subtractExpCurrent(UserData user, int subtractedExpCurrent) {
+        setExpCurrent(user, user.getExp_current() - subtractedExpCurrent);
+    }
+
     public static void addExpRecord(UserData user, int addedExpRecord) {
         setExpRecord(user, user.getExp_record() + addedExpRecord);
     }
+
+//    public static void subtractExpRecord(UserData user, int subtractedExpCurrent) {
+//
+//    }
 
 
 }

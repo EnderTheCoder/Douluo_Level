@@ -1,10 +1,13 @@
 package douluolevel.douluolevel;
 
 import douluolevel.douluolevel.command.AdminCommand;
-import douluolevel.douluolevel.config.ConfigReader;
+import douluolevel.douluolevel.command.Quality;
 import douluolevel.douluolevel.database.SQLite;
 import douluolevel.douluolevel.database.TableInit;
+import douluolevel.douluolevel.listener.EXPEvent;
+import douluolevel.douluolevel.listener.LoginEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -20,6 +23,10 @@ public final class DouluoLevel extends JavaPlugin {
         instance = this;
         //保存默认的配置文件，如果配置文件没有的话会自动生成一个
         saveDefaultConfig();
+
+
+        Bukkit.getPluginManager().registerEvents(new EXPEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new LoginEvent(), this);
 
 
         //数据库初始化
@@ -40,9 +47,14 @@ public final class DouluoLevel extends JavaPlugin {
             return;
         }
 
-        getLogger().info("你成功加载了本插件-|斗罗等级DouluoLevel|-,本插件由Ender开发，GitHub地址：https://github.com/EnderTheCoder/");
+        getLogger().info(ChatColor.AQUA + "你成功加载了本插件-|斗罗等级DouluoLevel|-,本插件由Ender开发，GitHub地址：https://github.com/EnderTheCoder/");
+
         if (Bukkit.getPluginCommand("leveladmin") != null) {
             Objects.requireNonNull(Bukkit.getPluginCommand("leveladmin")).setExecutor(new AdminCommand());
+        }
+
+        if (Bukkit.getPluginCommand("quality") != null) {
+            Objects.requireNonNull(Bukkit.getPluginCommand("quality")).setExecutor(new Quality());
         }
     }
 

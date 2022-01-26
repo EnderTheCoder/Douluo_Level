@@ -1,5 +1,7 @@
 package douluolevel.douluolevel.database;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -18,6 +20,7 @@ public class TableInit {
             return false;
         }
     }
+
 
     public static void table_user() {
         SQLite s = new SQLite();

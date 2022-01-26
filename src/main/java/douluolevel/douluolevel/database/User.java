@@ -1,6 +1,7 @@
 package douluolevel.douluolevel.database;
 
 import douluolevel.douluolevel.data.UserData;
+import org.bukkit.entity.Player;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -68,6 +69,17 @@ public class User {
         sqLite.bindString(6, user.getQualities().toJSONString());
         sqLite.execute();
         sqLite.close();
+    }
+
+    public static void userInit(Player player) {
+        insertUser(new UserData(
+                player.getName(),
+                player.getUniqueId().toString(),
+                0,
+                0,
+                0,
+                "{}"
+        ));
     }
 
     public static boolean isUserExists(String username) {

@@ -98,7 +98,14 @@
             <artifactId>AttributeAPI</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/AP-APIAttrbiteAPI.jar</systemPath>
+            <systemPath>${project.basedir}/lib/AttributeAPI.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.sucy</groupId>
+            <artifactId>SkillAPI</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/SkillAPI.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

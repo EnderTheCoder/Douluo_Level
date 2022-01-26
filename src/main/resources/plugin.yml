@@ -12,12 +12,24 @@ commands:
       - la
     description: 用于斗罗等级系统管理的命令
     permission: douluolevel.admin
-    permission-message: 你没有使用此命令的权限，请联系管理员查询
+    permission-message: 你没有使用此命令的权限，请联系管理员咨询
     usage: |
       /leveladmin
+  quality:
+    aliases:
+      - q
+    description: 用于管理玩家属性
+    permission: douluolevel.quality
+    permission-message: 你没有使用此命令的权限，请联系管理员咨询
+    usage: |
+      /quality upgrade <属性名> 升级某个属性
 permissions:
   douluolevel.admin:
     description: 管理员用权限
     default: true
   douluolevel.vip:
+    default: false
     description: VIP用权限
+  douluolevel.quality:
+    description: 属性管理权限
+    default: true
