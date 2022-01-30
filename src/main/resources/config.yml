@@ -96,7 +96,7 @@ message:
 level_command:
 # 这里应该是一个大于0的数值
   10:
-    - msg 你已经到达10级
-    - /gamemode 1
+    - tell $player$ 你升级了
+    - gamemode 1
   50:
-    - /msg xxx
+    - msg xxx
