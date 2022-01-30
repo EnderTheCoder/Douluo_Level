@@ -14,7 +14,13 @@ commands:
     permission: douluolevel.admin
     permission-message: 你没有使用此命令的权限，请联系管理员咨询
     usage: |
-      /leveladmin
+      /leveladmin set level <玩家> <等级> 设置某个玩家的等级
+      /leveladmin set quality <玩家> <属性> <等级> 设置某个玩家的某个属性的等级
+      /leveladmin set exp_current <玩家> <经验> 设置某个玩家的剩余经验等级(这不会影响到等级)
+      /leveladmin set exp_record <玩家> <经验> 设置某个玩家的总经验等级(这会影响到等级)
+      /leveladmin purge <玩家> 清除玩家的数据，仅离线可用
+      /leveladmin remake <玩家> 重置玩家的数据
+      /leveladmin show 显示某个玩家的等级和属性情况
   quality:
     aliases:
       - q
