@@ -21,7 +21,7 @@ public class Quality {
             user.setQualities(newUserQualities);
         } else user.getQualities().put(quality.getName(), level);
 
-        User.updateUser(user);
+        user.update();
 
     }
 

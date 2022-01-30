@@ -42,7 +42,7 @@ public class ConfigReader {
     //获取所有quality
     public static List<QualityData> getQualities() {
         List<QualityData> qualities= new ArrayList<>();
-        List<?> qualitiesRaw= config.getList("qualities");
+        List<?> qualitiesRaw = config.getList("qualities");
         for (Object quality : qualitiesRaw) {
             JSONObject qualityJson = (JSONObject) JSONObject.toJSON(quality);
             for (Map.Entry<?,?> entry1: qualityJson.entrySet()) {
@@ -89,6 +89,18 @@ public class ConfigReader {
 
         return config.getString("message." + (type == MessageType.CLIENT ? "client" : "server") + "." + messageName);
 
+    }
+
+    public static boolean isSpecialLevelMessageExists(int level) {
+        return config.getString("message.client.special." + level) != null;
+    }
+
+    public static boolean isLevelCommandExists(int level) {
+        return config.getList("level_command." + level) != null;
+    }
+
+    public static List<String> getLevelCommands(int level) {
+        return config.getStringList("level_command." + level);
     }
 
 }

@@ -1,6 +1,7 @@
 package douluolevel.douluolevel.database;
 
 import douluolevel.douluolevel.data.UserData;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.sql.ResultSet;
@@ -52,7 +53,7 @@ public class User {
 
     public static void deleteUser(UserData user) {
         SQLite sqLite = new SQLite();
-        sqLite.prepare("DELETE FORM user WHERE username = ?");
+        sqLite.prepare("DELETE FROM user WHERE username = ?");
         sqLite.bindString(1, user.getUsername());
         sqLite.execute();
         sqLite.close();
@@ -72,6 +73,17 @@ public class User {
     }
 
     public static void userInit(Player player) {
+        insertUser(new UserData(
+                player.getName(),
+                player.getUniqueId().toString(),
+                0,
+                0,
+                0,
+                "{}"
+        ));
+    }
+
+    public static void userInit(OfflinePlayer player) {
         insertUser(new UserData(
                 player.getName(),
                 player.getUniqueId().toString(),

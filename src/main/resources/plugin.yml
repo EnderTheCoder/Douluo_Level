@@ -23,6 +23,11 @@ commands:
     permission-message: 你没有使用此命令的权限，请联系管理员咨询
     usage: |
       /quality upgrade <属性名> 升级某个属性
+      /quality list 列出可升级的属性
+  levelmessage:
+    aliases:
+      - lm
+    description: 用于给玩家发送信息
 permissions:
   douluolevel.admin:
     description: 管理员用权限

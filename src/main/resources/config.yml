@@ -44,7 +44,7 @@ qualities:
       #最大等级
       max: 100
       #显示的中文名
-      display_name: 魂力
+      display_name: 智力
       #vip最大等级
       vip_max: 150
       #vip权限名称
@@ -56,12 +56,47 @@ qualities:
       attributes_distance:
         - 100    #下面对应位置写属性每一级的增长值
         - 50
-debug: true
+# 是否开启提示调试信息显示
+debug: false
 
+# 各种消息自定义
 message:
+  # 客户端消息
   client:
     quality_not_found: 你查找的属性不存在
     quality_upgrade_successful: 属性升级成功！
     quality_exp_not_enough: 你的经验不足以升级该属性！
-    level_upgrade: 你的等级获得了提升！
+    quality_level_max: 你该属性的等级已经达到上限
+    quality_list: 属性代码：$quality$ | 属性名称：$quality_name$ | 属性最大等级： $quality_max$ | 属性等级： $quality_level$
+    level_upgrade:
+      # 每次升级都提示的信息
+      common: 你的等级获得了提升，当前等级$player_level$！
+      # 到达特殊等级提示的信息
+      special:
+        10: 你现在10级了，$player_name$你已经初步了解服务器
+        100: 你已经100级了，$player_name$你无敌了
+  #服务端消息
   server:
+    invalid_client_command: 这是一条仅能用于客户端的命令，禁止在服务端使用
+    player_not_found: 没有找到你输入的玩家
+    number_illegal: 你输入的数值不合法
+    admin_successful_set_level: 设置用户的等级成功
+    admin_successful_set_exp_record: 设置用户的总经验成功
+    admin_successful_set_exp_current: 设置用户的剩余经验成功
+    admin_successful_set_quality: 设置用户的属性等级成功
+    admin_successful_purge: 清除用户的数据成功
+    admin_successful_remake: 重置用户的数据成功
+    admin_successful_reload: 重载插件成功
+    player_is_online: 用户处于在线状态，你不能清除一个在线状态的用户的数据，因为这会引发插件的错误，请尝试使用/leveladmin remake来初始化玩家的数据
+    player_is_offline: 用户处于离线状态，此命令仅限于玩家在线时使用
+    quality_not_found: 你查找的属性不存在
+    player_level: 玩家：$player$ | 等级：$player_level$
+    player_quality_list: 属性代码：$quality$ | 属性名称：$quality_name$ | 属性最大等级： $quality_max$ | 属性等级： $quality_level$
+# 到达某个等级触发指令
+level_command:
+# 这里应该是一个大于0的数值
+  10:
+    - msg 你已经到达10级
+    - /gamemode 1
+  50:
+    - /msg xxx
