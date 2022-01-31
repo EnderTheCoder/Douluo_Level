@@ -4,7 +4,11 @@ main: douluolevel.douluolevel.DouluoLevel
 api-version: 1.12
 authors: [ Ender ]
 description: 用于斗罗服务器的等级系统
-depend: [PlaceholderAPI]
+depend:
+  - PlaceholderAPI
+  - AttributePlus
+  - SkillAPI
+  - AttributeAPI
 
 commands:
   leveladmin:

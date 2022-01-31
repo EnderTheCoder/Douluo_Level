@@ -2,13 +2,11 @@ package douluolevel.douluolevel;
 
 import douluolevel.douluolevel.command.AdminCommand;
 import douluolevel.douluolevel.command.QualityCommand;
-import douluolevel.douluolevel.config.ConfigReader;
 import douluolevel.douluolevel.database.SQLite;
 import douluolevel.douluolevel.database.TableInit;
 import douluolevel.douluolevel.listener.EXPEvent;
 import douluolevel.douluolevel.listener.LoginEvent;
-import douluolevel.douluolevel.placeholder.QualityPlaceholder;
-import douluolevel.douluolevel.placeholder.UserPlaceholder;
+import douluolevel.douluolevel.placeholder.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -46,6 +44,7 @@ public final class DouluoLevel extends JavaPlugin {
             //这里注册placeholder
 //            new QualityPlaceholder().
 //            new UserPlaceholder(this, "douluolevel").hook();
+            new Placeholder(this).register();
         } else {
             getLogger().severe("检测到你的服务器没有安装PlaceholderAPI，正在停用本插件");
             Bukkit.getPluginManager().disablePlugin(this);
