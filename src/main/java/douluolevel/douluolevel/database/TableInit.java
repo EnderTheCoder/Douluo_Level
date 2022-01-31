@@ -32,8 +32,15 @@ public class TableInit {
                 "    exp_record  integer,\n" +
                 "    exp_current integer,\n" +
                 "    qualities   text\n" +
-                ");");
+                ");\n" +
+                "\n" +
+                "create unique index user_username_uindex\n" +
+                "    on user (username);\n" +
+                "\n" +
+                "create unique index user_uuid_uindex\n" +
+                "    on user (uuid);\n");
         s.execute();
+        s.close();
     }
 
 

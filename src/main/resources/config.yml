@@ -35,6 +35,14 @@ qualities:
       attributes_distance:
         - 10    #下面对应位置写属性每一级的增长值
         - 5
+      skill_ap:
+        - 攻击力
+      skill_ap_distance:
+        - 1
+      skill_skill:
+        - 昊天飞锤
+      skill_skill_distance:
+        - 1
   #示例属性2
   - quality_2:
       #1级需要的经验
@@ -56,6 +64,14 @@ qualities:
       attributes_distance:
         - 100    #下面对应位置写属性每一级的增长值
         - 50
+      skill_ap:
+        - 攻击力
+      skill_ap_distance:
+        - 1
+      skill_skill:
+        - 昊天飞锤
+      skill_skill_distance:
+        - 1
 # 是否开启提示调试信息显示
 debug: false
 

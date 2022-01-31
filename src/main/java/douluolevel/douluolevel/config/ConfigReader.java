@@ -47,8 +47,14 @@ public class ConfigReader {
             JSONObject qualityJson = (JSONObject) JSONObject.toJSON(quality);
             for (Map.Entry<?,?> entry1: qualityJson.entrySet()) {
                 for (Map.Entry<?,?> entry2: ((JSONObject) JSONObject.toJSON(entry1)).entrySet()) {
+
                     List<String> attributes = Objects.requireNonNull(JSON.parseArray(getDesc(entry2.getValue().toString(), "attributes"))).toJavaList(String.class);
                     List<Integer> attributes_distance = Objects.requireNonNull(JSON.parseArray(getDesc(entry2.getValue().toString(), "attributes_distance"))).toJavaList(Integer.class);
+                    List<String> skill_ap = Objects.requireNonNull(JSON.parseArray(getDesc(entry2.getValue().toString(), "skill_ap"))).toJavaList(String.class);
+                    List<Integer> skill_ap_distance = Objects.requireNonNull(JSON.parseArray(getDesc(entry2.getValue().toString(), "skill_ap_distance"))).toJavaList(Integer.class);
+                    List<String> skill_skill = Objects.requireNonNull(JSON.parseArray(getDesc(entry2.getValue().toString(), "skill_skill"))).toJavaList(String.class);
+                    List<Integer> skill_skill_distance = Objects.requireNonNull(JSON.parseArray(getDesc(entry2.getValue().toString(), "skill_skill_distance"))).toJavaList(Integer.class);
+
                     qualities.add(new QualityData(
                             entry1.getKey().toString(),
                             getDesc(entry2.getValue().toString(), "display_name"),
@@ -58,7 +64,11 @@ public class ConfigReader {
                             Integer.parseInt(Objects.requireNonNull(getDesc(entry2.getValue().toString(), "vip_max"))),
                             getDesc(entry2.getValue().toString(), "vip_permission"),
                             attributes,
-                            attributes_distance
+                            attributes_distance,
+                            skill_ap,
+                            skill_ap_distance,
+                            skill_skill,
+                            skill_skill_distance
                     ));
                 }
             }
@@ -73,7 +83,7 @@ public class ConfigReader {
         }
         return null;
     }
-
+    //反射
     private static String getDesc(String jsonStr, String key) {
         JSONObject jsonObject = JSONObject.parseObject(jsonStr);
         for (Map.Entry<?,?> entry : jsonObject.entrySet()) {
@@ -90,11 +100,11 @@ public class ConfigReader {
         return config.getString("message." + (type == MessageType.CLIENT ? "client" : "server") + "." + messageName);
 
     }
-
+    //检测是否存在消息
     public static boolean isSpecialLevelMessageExists(int level) {
         return config.getString("message.client.special." + level) != null;
     }
-
+    //检测是否存在登记
     public static boolean isLevelCommandExists(int level) {
         return config.getList("level_command." + level) != null;
     }

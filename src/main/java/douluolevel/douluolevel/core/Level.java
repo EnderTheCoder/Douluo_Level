@@ -4,6 +4,7 @@ import douluolevel.douluolevel.config.ConfigReader;
 import douluolevel.douluolevel.data.LevelData;
 import douluolevel.douluolevel.data.UserData;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 
 import java.util.List;
 
@@ -17,8 +18,22 @@ public class Level {
 
     public static int calcLevel(UserData user, int exp) {
         LevelData level = getLevel();
+
+        int levelCounter = 0;
+
+        while (exp >= calcExp(levelCounter, level.getExp_initial(), 0)) {
+            levelCounter++;
+        }
+
         int max = user.getPlayer().hasPermission(level.getVip_permission()) ? level.getVip_max() : level.getMax();
-        return Math.max(Math.min(max, (exp - level.getExp_initial()) / level.getExp_distance() + 1), 0);
+        return Math.max(Math.min(max, levelCounter), 0);
+    }
+
+    public static int calcExp(int level, int exp, int depth) {
+        if (level == 0) return 0;
+        LevelData levelData = getLevel();
+        if (level == depth) return exp;
+        else return calcExp(level, exp + (depth - 1) * levelData.getExp_distance(), ++depth);
     }
 
     //自然升级
@@ -82,7 +97,7 @@ public class Level {
             List<String> commands = ConfigReader.getLevelCommands(newLevel);
 
             for (String command : commands) {
-                Bukkit.dispatchCommand(user.getPlayer(), command.replace("$player$", user.getUsername()));
+                Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(), command.replace("$player$", user.getUsername()));
             }
 
         }

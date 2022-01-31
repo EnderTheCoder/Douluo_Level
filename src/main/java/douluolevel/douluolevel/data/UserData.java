@@ -1,10 +1,13 @@
 package douluolevel.douluolevel.data;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sucy.skill.SkillAPI;
+import com.sucy.skill.api.player.PlayerData;
 import douluolevel.douluolevel.config.ConfigReader;
 import douluolevel.douluolevel.core.Level;
 import douluolevel.douluolevel.core.Quality;
 import douluolevel.douluolevel.core.attibute.Attribute;
+import douluolevel.douluolevel.core.skill.Skill;
 import douluolevel.douluolevel.database.User;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -164,4 +167,11 @@ public class UserData {
         Quality.checkAndRemoveQuality(this);
     }
 
+    public PlayerData getSkillAPIPlayerData() {
+        return SkillAPI.getPlayerData(getOfflinePlayer());
+    }
+
+    public void applySKills() {
+        Skill.applySkill(this);
+    }
 }

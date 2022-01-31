@@ -1,5 +1,6 @@
 package douluolevel.douluolevel.command;
 
+import com.sucy.skill.api.enums.ExpSource;
 import douluolevel.douluolevel.DouluoLevel;
 import douluolevel.douluolevel.config.ConfigReader;
 import douluolevel.douluolevel.core.Level;
@@ -11,6 +12,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
@@ -146,7 +148,7 @@ public class AdminCommand implements CommandExecutor {
             }
             //重载配置文件
             case "reload": {
-
+                DouluoLevel.instance.saveDefaultConfig();
                 DouluoLevel.instance.reloadConfig();
 
                 for (Player player : Bukkit.getOnlinePlayers()) {
@@ -154,6 +156,7 @@ public class AdminCommand implements CommandExecutor {
                     assert user != null;
                     user.checkAndRemoveQuality();
                     user.applyAttribute();
+                    user.applySKills();
                 }
                 sender.sendMessage(ConfigReader.getMessage(ConfigReader.MessageType.SERVER, "admin_successful_reload"));
                 break;
@@ -189,6 +192,12 @@ public class AdminCommand implements CommandExecutor {
                                     .replace("$quality_level$", entry.getValue().toString())
                     );
                 }
+                break;
+            }
+
+            case "test": {
+                sender.getServer();
+//                Bukkit.dispatchCommand(new CommandSender(), "tell EnderTheCoder test");
                 break;
             }
 

@@ -14,6 +14,26 @@ public class QualityData {
     String vip_permission;
     List<String> attributes;
     List<Integer> attributes_distance;
+    List<String> skill_ap;
+    List<Integer> skill_ap_distance;
+    List<String> skill_skill;
+    List<Integer> skill_skill_distance;
+
+    public List<Integer> getSkill_ap_distance() {
+        return skill_ap_distance;
+    }
+
+    public List<Integer> getSkill_skill_distance() {
+        return skill_skill_distance;
+    }
+
+    public List<String> getSkill_ap() {
+        return skill_ap;
+    }
+
+    public List<String> getSkill_skill() {
+        return skill_skill;
+    }
 
     public String getName() {
         return name;
@@ -51,7 +71,24 @@ public class QualityData {
         return attributes_distance;
     }
 
-    public QualityData(String name, String display_name, int exp_initial, int exp_distance, int max, int vip_max, String vip_permission, List<String> attributes, List<Integer> attributes_distance) {
+
+
+
+    public QualityData(
+            String name,
+            String display_name,
+            int exp_initial,
+            int exp_distance,
+            int max,
+            int vip_max,
+            String vip_permission,
+            List<String> attributes,
+            List<Integer> attributes_distance,
+            List<String> skill_ap,
+            List<Integer> skill_ap_distance,
+            List<String> skill_skill,
+            List<Integer> skill_skill_distance
+    ) {
         this.name = name;
         this.attributes = attributes;
         this.attributes_distance = attributes_distance;
@@ -61,5 +98,9 @@ public class QualityData {
         this.max = max;
         this.exp_distance = exp_distance;
         this.vip_max = vip_max;
+        this.skill_ap = skill_ap;
+        this.skill_ap_distance = skill_ap_distance;
+        this.skill_skill = skill_skill;
+        this.skill_skill_distance = skill_skill_distance;
     }
 }

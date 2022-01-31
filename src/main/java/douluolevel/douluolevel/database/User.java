@@ -51,6 +51,14 @@ public class User {
         }
     }
 
+    public static UserData getUser(Player player) {
+        return getUser(player.getName());
+    }
+
+    public static UserData getUser(OfflinePlayer player) {
+        return getUser(player.getName());
+    }
+
     public static void deleteUser(UserData user) {
         SQLite sqLite = new SQLite();
         sqLite.prepare("DELETE FROM user WHERE username = ?");
