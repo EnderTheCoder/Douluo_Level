@@ -1,5 +1,6 @@
 package douluolevel.douluolevel.core.attibute;
 
+import douluolevel.douluolevel.DouluoLevel;
 import douluolevel.douluolevel.config.ConfigReader;
 import douluolevel.douluolevel.data.QualityData;
 import douluolevel.douluolevel.data.UserData;
@@ -17,6 +18,9 @@ import static org.bukkit.Bukkit.getPlayer;
 public class Attribute {
 
     public void applyAttribute(UserData userData) {
+
+        if (!DouluoLevel.isAttributePlusEnabled()) return;
+
         List<String> list = new ArrayList<>();
         List<QualityData> qualities = getQualities();
 

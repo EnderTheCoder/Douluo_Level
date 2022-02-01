@@ -27,8 +27,12 @@ public class Skill {
                         }
                         for (int i = 0; i < quality.getSkill_ap().size(); i++) {
 
+
+
+
                             int deserved_ap = quality.getSkill_ap_distance().get(i) * Integer.parseInt(entry.getValue().toString());
                             int now_ap = user.getSkillAPIPlayerData().getAttribute(quality.getSkill_ap().get(i));
+
 
                             if (ConfigReader.isOnDebug()) {
                                 getLogger().info(String.valueOf(deserved_ap));

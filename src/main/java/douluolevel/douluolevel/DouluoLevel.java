@@ -64,6 +64,10 @@ public final class DouluoLevel extends JavaPlugin {
 
     }
 
+    public static boolean isAttributePlusEnabled() {
+        return Bukkit.getPluginManager().isPluginEnabled("AttributePlus") && Bukkit.getPluginManager().isPluginEnabled("AttributeAPI");
+    }
+
     @Override
     public void onDisable() {
         // Plugin shutdown logic

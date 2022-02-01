@@ -48,12 +48,25 @@ public class ConfigReader {
             for (Map.Entry<?,?> entry1: qualityJson.entrySet()) {
                 for (Map.Entry<?,?> entry2: ((JSONObject) JSONObject.toJSON(entry1)).entrySet()) {
 
-                    List<String> attributes = Objects.requireNonNull(JSON.parseArray(getDesc(entry2.getValue().toString(), "attributes"))).toJavaList(String.class);
-                    List<Integer> attributes_distance = Objects.requireNonNull(JSON.parseArray(getDesc(entry2.getValue().toString(), "attributes_distance"))).toJavaList(Integer.class);
-                    List<String> skill_ap = Objects.requireNonNull(JSON.parseArray(getDesc(entry2.getValue().toString(), "skill_ap"))).toJavaList(String.class);
-                    List<Integer> skill_ap_distance = Objects.requireNonNull(JSON.parseArray(getDesc(entry2.getValue().toString(), "skill_ap_distance"))).toJavaList(Integer.class);
-                    List<String> skill_skill = Objects.requireNonNull(JSON.parseArray(getDesc(entry2.getValue().toString(), "skill_skill"))).toJavaList(String.class);
-                    List<Integer> skill_skill_distance = Objects.requireNonNull(JSON.parseArray(getDesc(entry2.getValue().toString(), "skill_skill_distance"))).toJavaList(Integer.class);
+                    List<String> attributes = new ArrayList<>();
+                    JSONArray attributesArray = JSON.parseArray(getDesc(entry2.getValue().toString(), "attributes"));
+                    if (attributesArray != null) attributes = attributesArray.toJavaList(String.class);
+
+                    List<Integer> attributes_distance = new ArrayList<>();
+                    JSONArray attributesDistanceArray = JSON.parseArray(getDesc(entry2.getValue().toString(), "attributes_distance"));
+                    if (attributesDistanceArray != null) attributes_distance = attributesDistanceArray.toJavaList(Integer.class);
+
+                    List<String> skill_ap = new ArrayList<>();
+                    JSONArray skillAPArray = JSON.parseArray(getDesc(entry2.getValue().toString(), "skill_ap"));
+                    if (skillAPArray != null) skill_ap = skillAPArray.toJavaList(String.class);
+
+                    List<Integer> skill_ap_distance = new ArrayList<>();
+                    JSONArray skillAPDistanceArray = JSON.parseArray(getDesc(entry2.getValue().toString(), "skill_ap_distance"));
+                    if (skillAPDistanceArray != null) skill_ap_distance = skillAPDistanceArray.toJavaList(Integer.class);
+
+                    //废弃占位代码
+                    List<String> skill_skill = new ArrayList<>();
+                    List<Integer> skill_skill_distance = new ArrayList<>();
 
                     qualities.add(new QualityData(
                             entry1.getKey().toString(),

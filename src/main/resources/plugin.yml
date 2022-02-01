@@ -6,10 +6,10 @@ authors: [ Ender ]
 description: 用于斗罗服务器的等级系统
 depend:
   - PlaceholderAPI
-  - AttributePlus
   - SkillAPI
+softdepend:
+  - AttributePlus
   - AttributeAPI
-
 commands:
   leveladmin:
     aliases:

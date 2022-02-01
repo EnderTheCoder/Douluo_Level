@@ -13,7 +13,7 @@ public class SQLite {
 
     private Timestamp startTime;
 
-    public void connect() {
+    public synchronized void connect() {
         this.startTime = new Timestamp(System.currentTimeMillis());
             try {
                 Class.forName("org.sqlite.JDBC");
@@ -26,7 +26,7 @@ public class SQLite {
             if (ConfigReader.isOnDebug()) getLogger().info(ChatColor.GREEN + "数据库连接成功");
     }
 
-    public Connection getConnection() {
+    public synchronized Connection getConnection() {
         try {
             if (this.connection == null || !this.connection.isValid(1000)) connect();
         } catch (SQLException e) {
@@ -37,7 +37,7 @@ public class SQLite {
         return connection;
     }
 
-    public void prepare(String sql) {
+    public synchronized void prepare(String sql) {
         try {
             statement = getConnection().prepareStatement(sql);
         } catch (SQLException e) {
@@ -46,7 +46,7 @@ public class SQLite {
         }
     }
 
-    public void bindString(int number, String value) {
+    public synchronized void bindString(int number, String value) {
         try {
             statement.setString(number, value);
         } catch (SQLException e) {
@@ -55,7 +55,7 @@ public class SQLite {
         }
     }
 
-    public void bindInt(int number, int value) {
+    public synchronized void bindInt(int number, int value) {
         try {
             statement.setInt(number, value);
         } catch (SQLException e) {
@@ -65,7 +65,7 @@ public class SQLite {
 
     }
 
-    public void bindDouble(int number, double value) {
+    public synchronized void bindDouble(int number, double value) {
         try {
             statement.setDouble(number, value);
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class SQLite {
         }
     }
 
-    public void execute() {
+    public synchronized void execute() {
         try {
             statement.execute();
         } catch (SQLException e) {
@@ -83,7 +83,7 @@ public class SQLite {
         }
     }
 
-    public ResultSet result() {
+    public synchronized ResultSet result() {
         try {
             return statement.getResultSet();
         } catch (SQLException e) {
@@ -93,7 +93,7 @@ public class SQLite {
         }
     }
 
-    public void close() {
+    public synchronized void close() {
         //计算数据库查询所用时间并输出调试信息
         Timestamp endTime = new Timestamp(System.currentTimeMillis());
 
